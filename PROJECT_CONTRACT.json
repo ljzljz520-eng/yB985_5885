@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "metrics": {
+    "production_loc": 2281,
+    "production_files": 42,
+    "production_packages": 8,
+    "test_files": 9,
+    "production_functions": 240,
+    "decision_points": 346
+  },
+  "persistence": {
+    "module": "modernc.org/sqlite",
+    "entities": ["Store", "Inspection", "Finding", "Assignment", "Remediation", "User"],
+    "reopen_test": "TestPersistenceSurvivesReopen"
+  },
+  "workflows": [
+    {"steps": ["创建门店巡店记录", "登记问题和严重级别", "选择整改负责人", "通知负责人并确认分配"], "test": "TestWorkflowOpenAssign"},
+    {"steps": ["负责人填写整改说明", "上传整改附件引用", "审核整改内容", "关闭巡店记录"], "test": "TestWorkflowSubmitClose"},
+    {"steps": ["输入门店或区域条件", "选择巡店状态", "执行组合筛选", "查看问题统计和结果"], "test": "TestWorkflowListFilter"}
+  ]
+}
