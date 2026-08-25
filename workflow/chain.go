@@ -25,6 +25,9 @@ func (c *Chain) OpenAndAssign(i domain.Inspection, f domain.Finding, owner strin
 	if e := c.Service.Assign(f.ID, owner, "initial assignment"); e != nil {
 		return e
 	}
+	if c.Optional == nil {
+		return errors.New("notification dependency unavailable")
+	}
 	return c.Optional.Notify("assigned:" + f.ID)
 }
 func (c *Chain) SubmitAndClose(inspectionID, findingID, author, text string) error {
